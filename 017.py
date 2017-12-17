@@ -20,4 +20,4 @@ def num_to_words(n):
             else:
                 return words_dict[hundred_dict] + 'hundredand' + num_to_words(remainder)
 
-print sum([len(num_to_words(x)) for x in range(1,1001)])
+print(sum([len(num_to_words(x)) for x in range(1,1001)]))
