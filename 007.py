@@ -8,4 +8,4 @@ def nth_prime(n):
     primes = list(sieve.primerange(1,up_bound))
     return primes[n-1]
 
-print nth_prime(10001)
+print(nth_prime(10001))
