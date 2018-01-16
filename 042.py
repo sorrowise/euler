@@ -8,8 +8,4 @@ def alphabet(word):
 
 word_value = [alphabet(x) for x in data]
 triangle_num = [n*(n+1)//2 for n in range(1,25)]
-num = 0
-for x in word_value:
-    if x in triangle_num:
-        num += 1
-print(num)
+len([x for x in word_value if x in triangle_num])
