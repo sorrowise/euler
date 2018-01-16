@@ -8,7 +8,7 @@ while True:
     ps = set([p(n) for n in range(166,up)])
     hs = set([h(n) for n in range(144,up)])
     if (ts & ps & hs) == set():
-        up += 100
+        up += 10000
     else:
         print(ts & ps & hs)
         break
