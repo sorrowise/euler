@@ -8,7 +8,7 @@ def is_pandgit(x):
         return True
     return False
 
-max([x for x in list(sieve.primerange(1,7654321)) if is_pandgit(x)])
+max([x for x in list(sieve.primerange(1234567,7654321)) if is_pandgit(x)])
 
 # approach 2, time cost = 180ms
 
