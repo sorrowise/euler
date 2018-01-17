@@ -9,7 +9,7 @@ for a in range(1,100):
     start = 1234 if a <=9 else 123
     for b in range(start,10000//a):
         prod = a * b
-        total_str = int(str(a) + str(b) + str(prod))
-        if is_pandgit(total_str):
+        total_num = int(str(a) + str(b) + str(prod))
+        if is_pandgit(total_num):
             res.add(prod)
 print(sum(res))
