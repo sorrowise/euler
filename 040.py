@@ -1,5 +1,3 @@
-# time cost = 3.96s
-
 from functools import reduce
 from operator import add,mul
 
