@@ -1,3 +1,5 @@
+# time cost = 711ms
+
 from math import sqrt
 from sympy.ntheory import isprime
 
