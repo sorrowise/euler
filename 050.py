@@ -1,3 +1,5 @@
+# time cost = 329 µs
+
 from sympy import sieve
 from sympy.ntheory import isprime
 
