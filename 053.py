@@ -1,4 +1,4 @@
-# time cost = 12.6ms
+# ans = 4075, time cost = 12.6ms
 
 from math import factorial as fac
 
