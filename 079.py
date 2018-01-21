@@ -20,7 +20,7 @@ def main():
     after_length = {}
     for i in nums:
         lst = [str(x) for x in set(data) if str(i) in str(x)]
-        afters = set(reduce(add,[after_num(x,str(i)) for x in lst]))
+        afters = set(reduce(add,[after_num(x,i) for x in lst]))
         after_length.update({i:len(afters)})
     res = sorted(after_length.items(),key=lambda x:x[1],reverse=True)
     return reduce(add,[str(x[0]) for x in res])
