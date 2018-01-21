@@ -3,6 +3,11 @@
 from functools import reduce
 from operator import add
 
+data = []
+with open("euler/ep79.txt") as f:
+    for line in f.readlines():
+        data.append(int(line))
+
 def after_num(x,i):
     after = x[x.find(str(i))+1:]
     if len(after) == 2:
