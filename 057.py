@@ -14,3 +14,5 @@ def main():
         if n_digits > d_digits:
             num += 1
     return num
+
+print(main())
