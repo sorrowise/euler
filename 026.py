@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from math import gcd
+from sympy import isprime
 
 def repeat_num(n):
     rem = [1]
@@ -7,8 +8,11 @@ def repeat_num(n):
         if rem[-1] == 0:
             return 0
         elif rem[-1] in rem[:-1]:
-            return (len(rem)-1-rem.index(rem[-1]))
+            return (len(rem)-1)
 
-reps = [repeat_num(x) for x in range(1,1001)]
-max_rep = reps.index(max(reps)) + 1
-print max_rep
+def main(n=1000):
+    for i in range(n,1,-1):
+        if gcd(10,i) == 1 and isprime(i):
+            rep_num = repeat_num(i)
+            if rep_num == i-1:
+                return i     
