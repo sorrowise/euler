@@ -1,3 +1,5 @@
+# time cost = 11.7 ms ± 188 µs
+
 from math import gcd
 from sympy import isprime
 
