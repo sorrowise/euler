@@ -1,30 +1,20 @@
-# -*- coding: utf-8 -*-
+# time cost = 2.34 s ± 48 ms
 
-from math import sqrt
-from sympy import sieve
+from sympy import isprime
 
-def is_prime(n):
-    if n<=1:
-        return False
-    else:
-        primes = list(sieve.primerange(1,int(sqrt(n))+1))
-        return not [i for i in primes if n%i == 0]
-
-def quad_prime(a,b):
+def consecutive_primes(a,b):
     f = lambda n,a,b : n**2 + a*n + b
     n = 0
     while True:
-        if is_prime(f(n,a,b)):
+        if isprime(f(n,a,b)):
             n = n + 1
         else:
             return n
 
-arr = [x for x in range(-999,1000) if x%2==1]
-primes = list(sieve.primerange(1,1001))
-res = []
-for a in arr:
-    for b in primes:
-        res.append((a,b,quad_prime(a,b)))
-consec_num = [x[2] for x in res]
-a,b = res[consec_num.index(max(consec_num))][0:2]
-print a*b
+def main():
+    res = {}
+    for a in range(-999,1000,2):
+        for b in [x for x in range(-1000,1001) if isprime(x)]:
+            res[consecutive_primes(a,b)] = (a,b)
+    a,b = res[max(res)]
+    return a*b
