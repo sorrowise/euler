@@ -2,7 +2,7 @@
 
 from sympy import isprime
 
-def consecutive_primes(a,b):
+def primes_number(a,b):
     f = lambda n,a,b : n**2 + a*n + b
     n = 0
     while True:
@@ -15,6 +15,6 @@ def main():
     res = {}
     for a in range(-999,1000,2):
         for b in [x for x in range(-1000,1001) if isprime(x)]:
-            res[consecutive_primes(a,b)] = (a,b)
+            res[primes_number(a,b)] = (a,b)
     a,b = res[max(res)]
     return a*b
