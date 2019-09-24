@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
+# time cost = 1.47 µs ± 2.67 ns
 
-f1 = lambda n : n**2-n+1
-f2 = lambda n : 4*n**2 + 1
-f3 = lambda n : (2*n+1)**2
-upleft_downright = sum([f1(x) for x in range(1,1002)])
-upright = sum([f3(x) for x in range(1,501)])
-downleft = sum([f2(x) for x in range(1,501)])
-print (upleft_downright + upright + downleft)
+def main(n=500):
+    res = 16*n**3/3 + 10*n**2 + 26*n/3 + 1
+    return int(res)
