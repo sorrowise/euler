@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
+# time cost = 761 ms ± 19.2 ms
 
-def is_equal(num,n=5):
-    res = [(int(x))**n for x in str(num)]
-    return num == sum(res)
-
-def digit_powers():
-    ub = 6*(9**5)
-    res = [x for x in range(1000,ub) if is_equal(x)]
-    return res
-
-print sum(res)
+def main():
+    power_dict = {i:i**5 for i in range(0,10)}
+    res = []
+    for i in range(10,6*9**5):
+        sum_of_digits = sum([power_dict[int(x)] for x in str(i)])
+        if i == sum_of_digits:
+            res.append(i)
+    return sum(res)
