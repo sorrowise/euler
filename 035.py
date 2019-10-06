@@ -1,15 +1,24 @@
-from sympy import sieve
-primes = list(sieve.primerange(10,1e6))
+# time cost = 119 ms ± 4.07 ms
 
-def rotate(s):
-    s = str(s)
-    lst = []
+from sympy import sieve,isprime
+
+def rotate_set(num):
+    s = str(num)
+    res = {num}
     for i in range(len(s)):
-        new_string = s[1:] + s[0]
-        lst.append(int(new_string))
-        s = new_string
-    return lst
+        new = s[1:] + s[0]
+        res.add(int(new))
+        s = new
+    return res
 
-odd_set = {'1','3','7','9'}
-primes_filter = [x for x in primes if set(str(x))-odd_set == set()]
-len([x for x in primes_filter if all(x in primes_filter for x in rotate(x))])+4
+def main():
+    primes = set(sieve.primerange(100,1e6))
+    digitset = {'1','3','7','9'}
+    res_set = {i for i in primes if set(str(i))<=digitset}
+    for ele in res_set:
+        x = rotate_set(ele)
+        for i in x:
+            if isprime(i) == False:
+                res_set = res_set-x
+                break
+    return len(res_set)+13
