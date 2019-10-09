@@ -1,19 +1,26 @@
-from sympy import sieve
+# time cosst = 76.2 ms ± 249 µs
 
-def is_truncprime(x,lst):
+from sympy import isprime,sieve
+
+def is_twoside_truncatable_prime(x):
     s = str(x)
-    for d in range(1,len(s)):
-        if int(s[d:]) not in primes_filter or int(s[:d]) not in lst:
+    for i in range(1,len(s)):
+        if not isprime(int(s[i:])) or not isprime(int(s[:i])):
             return False
     return True
 
-def sum_of_truncprimes():
-    upbound = 1e6
-    res = []
-    while len(res) < 15:
-        primes = list(sieve.primerange(1,upbound))
-        odd_set = {'1','3','7','9'}
-        primes_filter = [x for x in primes if set(str(x))-odd_set == set() or x<100]
-        res = [x for x in primes_filter if is_truncprime(x,primes_filter)]
-        upbound += 10000
-    return sum(res) - sum([2,3,5,7])
+def main():
+    num,ans = 0,0
+    for i in sieve.primerange(10,1e6):
+        if i < 100 and is_twoside_truncatable_prime(i):
+            num += 1
+            ans += i
+        elif i>=100:
+            s = str(i)
+            cond1 = (s[0]=='3' or '7') and (s[-1]=='3' or '7')
+            cond2 = set(s)<={'1','3','7','9'}
+            if cond1 and cond2 and is_twoside_truncatable_prime(i):
+                num += 1
+                ans += i
+        if num>=11:
+            return ans
