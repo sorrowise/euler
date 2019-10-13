@@ -9,4 +9,4 @@ def main():
         if set(str(prevp)) == set('1234567'):
             return prevp
         else:
-            start = prevprime(prevp)  
+            start = prevp   
