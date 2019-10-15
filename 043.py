@@ -1,18 +1,16 @@
-# ans = 16695334890, time cost = 103.166 s
+# time cost = 5.29 s ± 7.2 ms
 
-from itertools import permutations as p
-from operator import add
-from functools import reduce
-from numpy import array
+from itertools import permutations
 
 def main():
-    f = lambda tp : reduce(add,(str(x) for x in tp))
-    pandigts = [f(x) for x in list(p(range(10),10))][362880:]
-    myint = lambda x : int(x) if x[0]!='0' else int(x[1:])
-    res = 0
-    denominator = array([2,3,5,7,11,13,17])
-    for pd in pandigts:
-        nominator = array([myint(pd[x:x+3]) for x in range(1,8)])
-        if all(nominator%denominator == 0):
-            res += int(pd)
-    return res
+    res,ans = [],0
+    for i in permutations(range(10),10):
+        d_by_three = (i[2]+i[3]+i[4])%3==0
+        d_by_seven = (10*i[4]+i[5]-i[6]*2)%7==0
+        d_by_eleven = (i[5]-i[6]+i[7])%11==0
+        d_by_thirteen = (100*i[6]+10*i[7]+i[8])%13==0
+        d_by_seventeen = (100*i[7]+10*i[8]+i[9])%17==0
+        cond = d_by_three and d_by_seven and d_by_eleven and d_by_thirteen and d_by_seventeen
+        if i[0]!=0 and i[5]==5 and i[3]%2==0 and cond:
+            ans += sum([x*10**y for x,y in zip(i,range(9,-1,-1))])
+    return ans
