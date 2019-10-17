@@ -1,14 +1,17 @@
-t = lambda n : n*(n+1)/2
-p = lambda n : n*(3*n-1)/2
-h = lambda n : n*(2*n-1)
+# time cost = 18.1 ms ± 30.1 µs
 
-up = 10001
-while True:
-    ts = set([t(n) for n in range(286,up)])
-    ps = set([p(n) for n in range(166,up)])
-    hs = set([h(n) for n in range(144,up)])
-    if (ts & ps & hs) == set():
-        up += 10000
-    else:
-        print(ts & ps & hs)
-        break
+from math import sqrt
+
+def is_pantagon(x):
+    if (sqrt(24*x+1)+1) % 6 == 0:
+        return True
+    return False
+
+def main():
+    i = 144
+    while True:
+        h = i*(2*i-1)
+        if is_pantagon(h):
+            return h
+        else:
+            i += 1
