@@ -1,12 +1,20 @@
-# ans = 134043, time cost = 5.08 s
+# time cost = 2.07 s ± 3.09 ms
 
-from sympy.ntheory import factorint
+from sympy import primefactors,nextprime
+
+def first_int(arr):
+    f = lambda x : len(primefactors(x))
+    for i in range(len(arr)-3):
+        if f(arr[i])==4 and f(arr[i+1])==4 and f(arr[i+2])==4 and f(arr[i+3])==4:
+            return arr[i]
+    return False
 
 def main():
-    start = 646
+    p = 211
     while True:
-        lst = [start+i for i in range(4)]
-        factor_num = [len(factorint(x)) for x in lst]
-        if all(x==4 for x in factor_num):
-            return start
-        start += 1
+        nextp = nextprime(p)
+        if (nextp - p) > 4:
+            ans = first_int(range(p+1,nextp))
+            if ans != False:
+                return ans
+        p = nextp
