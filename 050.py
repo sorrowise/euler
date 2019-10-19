@@ -1,4 +1,5 @@
 # time cost = 6.7 ms ± 709 µs
+
 from sympy import isprime,primerange,nextprime
 
 def primesum_below_N(N):
