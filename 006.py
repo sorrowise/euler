@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
+# time cost = 569 ns ± 45.8 ns
 
-arr = [x**2 for x in range(1,101)]
-res = (sum(range(1,101)))**2 - sum(arr)
-print res
+def main(n=100):
+    ans = n*(n-1)*(n+1)*(3*n+2)/12
+    return int(ans)
