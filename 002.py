@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
+# time cost = 2.75 µs ± 75.2 ns
 
-def fibs_below(n,a=1,b=2):
-    fib = [a,b]
+def main(N=4e6):
+    a,b = 2,8
+    arr = [a,b]
     while True:
-        a,b = b,a+b
-        if b <= n:
-            fib.append(b)
-        else:
-            return fib
-
-print sum([x for x in fibs_below(4e6) if x%2==0])
+        a,b = b,4*b+a
+        arr.append(b)
+        if b > N:
+            return sum(arr[:-1])
