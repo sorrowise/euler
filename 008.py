@@ -1,5 +1,7 @@
 # time cost = 4.71 ms ± 3.86 µs
 
+from functools import reduce
+
 def main():
     with open('euler/ep08.txt','r') as f:
         data = ''
