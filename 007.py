@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
+# time cost = 197 ms ± 1.18 ms
 
-from sympy import sieve
+from sympy import primerange
 from math import log,ceil
 
-def nth_prime(n):
-    up_bound = ceil((log(n)+log(log(n))) * n)
-    primes = list(sieve.primerange(1,up_bound))
+def main(n=10001):
+    upper_bound = ceil((log(n)+log(log(n))) * n)
+    primes = list(primerange(1,upper_bound))
     return primes[n-1]
-
-print(nth_prime(10001))
