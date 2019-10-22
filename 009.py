@@ -1,17 +1,9 @@
-# -*- coding: utf-8 -*-
+# time cost = 146 µs ± 791 ns
 
-from math import sqrt
-
-def find_pytha():
-    upBoundary = int(sqrt(500)) + 1
-    for i in range(upBoundary,1,-1):
-        if 500%i == 0:
-            n = 500/i - i
-            if i > n:
-                return i,n
-
-i,n = find_pytha()
-a = i**2 + n**2
-b = 2*i*n
-c = i**2 - n**2
-print a*b*c
+def main(p=1000):
+    for a in range(1,p//3):
+        n,d = p**2-2*p*a,2*p-2*a
+        if n % d == 0:
+            b = n/d
+            c = p-a-b
+            return int(a*b*c)
