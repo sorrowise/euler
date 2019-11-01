@@ -1,26 +1,18 @@
-# -*- coding: utf-8 -*-
+# time cost = 127 ms ± 1.09 ms
 
-from math import sqrt
+from sympy import factorint
 
-def num_of_divisor(n):
-    if n == 1:
-        return 1
-    else:
-        up_bound = int(sqrt(n)) + 1
-        num = 0
-        for i in range(1,up_bound):
-            if n%i == 0:
-                num = num + 1
-        return (2*num) - (1 if (up_bound-1)**2 == n else 0)
+def number_of_divisor(n):
+    d = factorint(n)
+    res = 1
+    for i in d:
+        res *= (d[i]+1) if i%2==1 else d[i]
+    return res
 
-def numd_of_triangle():
+def main(): 
     n = 7
-    while True:
-        triangle = n*(n+1)//2
-        num_d = num_of_divisor(triangle)
-        if num_d <= 500:
-            n = n + 1
-        else:
-            return triangle
-
-print numd_of_triangle()
+    nd,nnd = number_of_divisor(n),number_of_divisor(n+1)
+    while nd*nnd <= 500:
+        n += 1
+        nd,nnd = nnd,number_of_divisor(n+1)
+    return n*(n+1)//2
