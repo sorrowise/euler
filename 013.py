@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
+# time cost = 159 µs ± 858 ns
 
-large_sum = 0
-f = open("euler/ep13.txt")
-for line in f.readlines():
-    large_sum += int(line)
-print str(large_sum)[:10]
+def main():
+    large_sum = sum(map(int,open('data/ep13.txt')))
+    ans = str(large_sum)[:10]
+    return ans
