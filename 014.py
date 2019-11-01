@@ -3,8 +3,7 @@
 def main(N=10**6):
     d = {}
     for x in range(2,N):
-        i = x
-        n = 0
+        i,n = x,0
         while x != 1:
             if x < i:
                 n = n + d[x]
