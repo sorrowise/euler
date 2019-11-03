@@ -1,3 +1,5 @@
-# -*- coding: utf-8 -*-
+# time cost = 51.6 µs ± 629 ns
 
-print sum([int(x) for x in str(2**1000)])
+def main():
+    ans = sum(map(int,str(2**1000)))
+    return ans
