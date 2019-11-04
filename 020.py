@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+# time cost = 27.2 µs ± 149 ns
 
-fac = lambda n:reduce(lambda x,y:x*y,range(1,n+1))
-print sum([int(x) for x in str(fac(100))])
+from math import factorial as fac
+
+def main():
+    ans = sum(map(int,str(fac(100))))
+    return ans
