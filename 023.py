@@ -1,14 +1,18 @@
-# -*- coding: utf-8 -*-
+# time cost = 798 ms ± 1.93 ms
 
-def abundants(n):
-    res = []
-    for i in range(1,n+1):
-        if sum_of_divs(i) > i:
-            res.append(i)
+def sigma(n):
+    res = 0
+    for i in range(1,int(n**0.5)+1):
+        if n % i == 0:
+            res += (i + n//i) if i**2 != n else i
+    return res-n
+
+def main():
+    limit = 28123
+    res,abn = 0,set()
+    for i in range(1,limit+1):
+        if sigma(i)>i:
+            abn.add(i)
+        if not any((i-x in abn) for x in abn):
+            res += i
     return res
-
-up_bound = 28123
-arr = brr = abundants(up_bound)
-all_divs = list(set([x+y for x in arr for y in brr if (x+y)<up_bound]))
-res = sum(range(1,up_bound))-sum(all_divs)
-print res
