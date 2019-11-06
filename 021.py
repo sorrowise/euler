@@ -1,22 +1,18 @@
-# -*- coding: utf-8 -*-
+# time cost = 206 ms ± 2.44 ms
 
-from math import sqrt
+from sympy import factorint
 
-def divisors(n):
-    divs = []
-    for i in range(1,int(sqrt(n))+1):
-        if n%i == 0:
-            divs.append(i)
-            divs.append(n/i)
-    return list(set(divs))
+def sum_of_divisors(n):
+    divs = factorint(n)
+    res = 1
+    for p in divs:
+        res *= (p**(divs[p]+1)-1)//(p-1)
+    return res-n
 
-sum_of_divs = lambda n : sum(divisors(n))-n
-
-def amicable_num(n):
+def main(n=10000):
     arr = []
-    for i in range(1,n+1):
-        if sum_of_divs(sum_of_divs(i)) == i and sum_of_divs(i) !=i:
+    for i in range(2,n+1):
+        a = sum_of_divisors(i)
+        if a != i and sum_of_divisors(a) == i:
             arr.append(i)
-    return arr   
-
-print sum(amicable_num(10000))
+    return sum(arr)  
