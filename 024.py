@@ -1,19 +1,15 @@
-# -*- coding: utf-8 -*-
+# time cost = 280 ns ± 1.51 ns
 
-from math import factorial, floor
+from math import factorial as fac
+from functools import lru_cache
 
-def kthperm(S, kth):
-    P = []
-    k = kth - 1
-    S = list(S)
-    while S != []:
-        f = factorial(len(S)-1)
-        i = int(floor(k/f))
-        x = S[i]
-        k = k%f
-        P.append(x)
-        S.remove(x)
-    return int(reduce(lambda x,y:x+y,P,''))
+@lru_cache(maxsize=128)
+def nth_lexi_perm(n,s):
+    if len(s) == 1:
+        return s
+    else:
+        q,r = divmod(n,fac(len(s)-1))
+        return (s[q] + nth_lexi_perm(r,s[:q]+s[q+1:]))
 
-S = '0123456789'
-print kthperm(S,1000000)
+def main(n=10**6,s='0123456789'):
+    return nth_lexi_perm(n-1,s)
