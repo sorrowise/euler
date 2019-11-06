@@ -1,14 +1,9 @@
-# -*- coding: utf-8 -*-
+# time cost = 40.2 ms ± 412 µs
 
-def fib_digit(bound):
-    x = 1
-    y = 1
-    n = 2
-    fib = [1,1]
-    while len(str(fib[-1])) < bound:
-        x,y = y,x+y
-        fib.append(y)
-        n = n+1
-    return n
-
-print fib_digit(1000)
+def main(N=1000):
+        a,b,n = 1,1,1
+        while True:
+            n += 1
+            a,b = b,a+b
+            if len(str(a)) == N:
+                return n
