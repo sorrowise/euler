@@ -1,13 +1,8 @@
-# time cost = 860ms
+# time cost = 314 ms ± 5.06 ms
 
-def is_permuted(x):
-    multiples = [set(str(x*n)) for n in range(1,7)]
-    if all(x==multiples[0] for x in multiples):
-        return True
-    return False
+from itertools import count
 
 def main():
-    start = 10
-    while not is_permuted(start):
-        start += 1
-    return start
+    for x in count(10,1):
+        if all(set(str(k*x))==set(str(x)) for k in range(6,1,-1)):
+            return x
