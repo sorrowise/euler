@@ -1,15 +1,16 @@
-# time cost = 342 ms ± 2.79 ms
+# time cost = 355 ms ± 1.51 ms
 
 from sympy import nextprime,isprime
 from collections import Counter
 
 def is_replacable_prime(n):
-    count = Counter(str(n))
-    most = count.most_common(1)[0]
-    if most[1] == 3 and most[0] in set('012'):
+    s = str(n)
+    count = Counter(s)
+    num,d = count.most_common(1)[0]
+    if d == 3 and num in set('012'):
         k = 1
-        for j in range(int(most[0])+1,10):
-            new = str(n).replace(most[0],str(j))
+        for j in range(int(num)+1,10):
+            new = s.replace(num,str(j))
             if isprime(int(new)):
                 k += 1
         if k == 8:
@@ -17,7 +18,7 @@ def is_replacable_prime(n):
     return False
 
 def main():
-    n = 10001
+    n = 1001
     while True:
         p = nextprime(n)
         if is_replacable_prime(p):
