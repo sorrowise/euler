@@ -18,7 +18,7 @@ def is_replacable_prime(n):
     return False
 
 def main():
-    n = 1001
+    n = 1111
     while True:
         p = nextprime(n)
         if is_replacable_prime(p):
