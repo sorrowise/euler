@@ -1,18 +1,13 @@
-# ans = 249, time cost = 71.5ms
+# time cost = 64.8 ms ± 229 µs
 
 def is_lychrel(x):
-    n = 1
     is_palindrome = lambda x : str(x) == str(x)[::-1]
-    while True:
-        reverse = str(x)[::-1]
-        if is_palindrome(x+int(reverse)):
+    for _ in range(50):
+        x += int(str(x)[::-1])
+        if is_palindrome(x):
             return False
-        else:
-            x = int(reverse) + x
-            n += 1
-            if n > 50:
-                return True
-            
+    return True
+
 def main():
-    res = len([x for x in range(1,10000) if is_lychrel(x)])
-    return res
+    ans = len([x for x in range(1,10000) if is_lychrel(x)])
+    return ans
