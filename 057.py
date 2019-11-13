@@ -1,18 +1,11 @@
-# ans = 153, time cost = 51.4ms
+# time cost = 885 µs ± 9.93 µs
 
-from fractions import Fraction as f
 from math import log10
 
-def main():
-    lst = [0]*1000
-    lst[0] = f(1,1)
-    num = 0
-    for i in range(1,1000):
-        lst[i] = 1 + 1/(1+lst[i-1])
-        n_digits = int(log10(lst[i].numerator)) + 1
-        d_digits = int(log10(lst[i].denominator)) + 1
-        if n_digits > d_digits:
-            num += 1
-    return num
-
-print(main())
+def main(N=1000):
+    c,n,d = 0,1,1
+    for i in range(N):
+        n,d = 2 * d + n,d + n
+        if int(log10(n)) > int(log10(d)):
+            c += 1
+    return c
