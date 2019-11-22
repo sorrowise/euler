@@ -1,43 +1,38 @@
-# time cost = 34.6 ms ± 635 µs
+# time cost = 92.1 ms ± 1.28 ms
 
-class Poly:
-    def __init__(self,s,n):
-        self.s = s
-        self.n = n
-        self.v = (self.n**2*(self.s-2)-self.n*(self.s-4))//2
-        self.ftd = self.v // 100
-        self.ltd = self.v % 100
+from collections import namedtuple
 
-        
-def fig_num_dict():
-    res,d = [],{}
-    
+def poly_numbers(s,n):
+    Pn = namedtuple('Pn','s v ftd ltd')
+    v = (n**2*(s-2)-n*(s-4))//2
+    ftd,ltd = v // 100, v % 100
+    pn = Pn(s,v,ftd,ltd)
+    return pn
+
+def poly_number_graph():
+    arr,graph = [],{}
     for s in range(3,9):
         for n in range(19,141):
-            num = Poly(s,n)
-            if 999 < num.v < 10000:
-                res.append(num)
-    
-    for x in res:
-        arr = []
-        for y in res:
-            if x.s != y.s and x.ltd == y.ftd:
-                arr.append((y.s,y.v))
-        d[(x.s,x.v)] = arr
-    
-    return d
+            pn = poly_numbers(s,n)
+            if 999 < pn.v < 10000 and pn.ltd>9:
+                arr.append(pn)
+    for pn in arr:
+        res = []
+        for apn in arr:
+            if pn.s != apn.s and pn.ltd == apn.ftd:
+                res.append(apn)
+        graph[pn] = res
+    return graph        
 
+def dfs(graph,types,numbers):
+    if len(types) == 6 and numbers[-1].ltd == numbers[0].ftd:
+        print(sum([x.v for x in numbers]))
+    else:
+        for pn in graph.get(numbers[-1],[]):
+            if pn.s not in types:
+                dfs(graph,types+[pn.s],numbers+[pn])
 
 def main():
-    d = fig_num_dict()
-    
-    def find_next(types,data):
-        if len(types) == 6 and (data[0]//100 == data[-1]%100):
-            print(sum(data))
-        else:
-            for t,n in d.get((types[-1],data[-1]),[]):
-                if t not in types:
-                    find_next(types+[t],data+[n])
-    
-    for k,v in d:
-        find_next([k],[v])
+    graph = poly_number_graph()
+    for pn in graph:
+        dfs(graph,[pn.s],[pn])
