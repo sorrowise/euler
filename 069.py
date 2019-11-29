@@ -1,16 +1,11 @@
-# ans = 510510, time cost = 21.4 µs
+# time cost = 6.91 ms ± 154 µs
 
-from sympy import sieve
-from operator import mul
-from functools import reduce
+from sympy import prime
 
-def main():
-    lst = list(sieve.primerange(1,25))
-    prod = lambda x : reduce(mul,x)
-    index = 1
-    while prod(lst[:index])<10**6:
-        index += 1
-    return prod(lst[:index-1])
-
-print(main())
-
+def main(N=10**6):
+    i,prod,arr = 1,1,[]
+    while prod <= N:
+        prod *= prime(i)
+        arr.append(prod)
+        i += 1
+    return arr[-2]
