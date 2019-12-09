@@ -1,4 +1,16 @@
-# time cost = 101 ns ± 0.171 ns
+# approach 1, time cost = 2.97 s ± 6.42 ms
+
+def farey_seq(n=12000):
+    b, d = 3, 11999
+    ans = 0
+    while d!=2:
+        ans += 1
+        k = int((n + b) / d)
+        b, d = d, k * d - b
+    return ans
+
+
+# approach 2, time cost = 101 ns ± 0.171 ns
 
 from functools import lru_cache
 
