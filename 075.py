@@ -1,6 +1,6 @@
-from math import gcd
-
 # time cost = 823 ms ± 3.39 ms
+
+from math import gcd
 
 def main(N=1500000):
     dt,limit = {},int((N//2)**0.5)+1
