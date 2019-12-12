@@ -1,4 +1,4 @@
-# time cost = 1.37 s ± 63.6 ms
+# time cost = 720 ms ± 18.5 ms
 
 from math import gcd
 from collections import Counter
