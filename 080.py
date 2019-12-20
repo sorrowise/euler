@@ -7,7 +7,7 @@ def jarvis_sqrt_sum(n,prec=100):
             a,b = a-b,b+10
         else:
             a,b = a*100,(b-b%10)*10+b%10
-    return sum([int(x) for x in str(b)[:100]])
+    return sum([int(x) for x in str(b)[:prec]])
 
 def main():
     numbers = set(range(2,100))-{x**2 for x in range(2,10)}
