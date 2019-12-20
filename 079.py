@@ -1,26 +1,18 @@
-# ans = 73162890, time cost = 288 µs 
+# time cost = 367 µs ± 2.94 µs
 
-from functools import reduce
-from operator import add
+import networkx as nx
 
-data = []
-with open("euler/ep79.txt") as f:
-    for line in f.readlines():
-        data.append(int(line))
-
-def after_num(x,i):
-    after = x[x.find(str(i))+1:]
-    if len(after) == 2:
-        return list((after[0],after[1]))
-    else:
-        return list(after)   
+def get_data_from_file(file_name="data/ep79.txt"):
+    data = set()
+    with open(file_name) as f:
+        for line in f.readlines():
+            data.add(line)
+    return data
 
 def main():
-    nums = [0,1,2,3,6,7,8,9]
-    after_length = {}
-    for i in nums:
-        lst = [str(x) for x in set(data) if str(i) in str(x)]
-        afters = set(reduce(add,[after_num(x,i) for x in lst]))
-        after_length.update({i:len(afters)})
-    res = sorted(after_length.items(),key=lambda x:x[1],reverse=True)
-    return reduce(add,[str(x[0]) for x in res])
+    data = get_data_from_file()
+    G = nx.DiGraph()
+    for i in data:
+        G.add_edges_from([(i[0],i[1]),(i[1],i[2])])
+    ans = list(nx.all_topological_sorts(G))[0]
+    return int(''.join(ans))
