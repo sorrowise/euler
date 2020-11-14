@@ -1,14 +1,14 @@
-# time cost = 6.44 s ± 32.2 ms
+# time cost = 2.79 s ± 10.9 ms
 
 from itertools import count
 
 def is_bouncy_number(n):
-    digits = [int(x) for x in str(n)]
-    diff = [x-y for x,y in zip(digits[1:],digits[:-1])]
-    if min(diff) < 0 and max(diff) > 0:
-        return True
-    else:
+    sort = sorted(str(n))
+    lst = list(str(n))
+    if sort == lst or sort == lst[::-1]:
         return False
+    else:
+        return True
 
 def main(pert=0.99):
     n = 0
