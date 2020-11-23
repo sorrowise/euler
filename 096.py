@@ -1,4 +1,69 @@
-import numpy as np
+# time cost = 221 ms ± 2.83 ms
+
+from itertools import product
+
+def exact_cover(X, Y):
+    X = {j: set() for j in X}
+    for i, row in Y.items():
+        for j in row:
+            X[j].add(i)
+    return X, Y
+
+def select(X, Y, r):
+    cols = []
+    for j in Y[r]:
+        for i in X[j]:
+            for k in Y[i]:
+                if k != j:
+                    X[k].remove(i)
+        cols.append(X.pop(j))
+    return cols
+
+def deselect(X, Y, r, cols):
+    for j in reversed(Y[r]):
+        X[j] = cols.pop()
+        for i in X[j]:
+            for k in Y[i]:
+                if k != j:
+                    X[k].add(i)
+
+def solve(X, Y, solution):
+    if not X:
+        yield list(solution)
+    else:
+        c = min(X, key=lambda c: len(X[c]))
+        for r in list(X[c]):
+            solution.append(r)
+            cols = select(X, Y, r)
+            for s in solve(X, Y, solution):
+                yield s
+            deselect(X, Y, r, cols)
+            solution.pop()
+
+def solve_sudoku(size, grid):
+    R, C = size
+    N = R * C
+    X = ([("rc", rc) for rc in product(range(N), range(N))] +
+         [("rn", rn) for rn in product(range(N), range(1, N + 1))] +
+         [("cn", cn) for cn in product(range(N), range(1, N + 1))] +
+         [("bn", bn) for bn in product(range(N), range(1, N + 1))])
+    Y = dict()
+    for r, c, n in product(range(N), range(N), range(1, N + 1)):
+        b = (r // R) * R + (c // C) # Box number
+        Y[(r, c, n)] = [
+            ("rc", (r, c)),
+            ("rn", (r, n)),
+            ("cn", (c, n)),
+            ("bn", (b, n))]
+    X, Y = exact_cover(X, Y)
+    for i, row in enumerate(grid):
+        for j, n in enumerate(row):
+            if n:
+                select(X, Y, (i, j, n))
+    for solution in solve(X, Y, []):
+        for (r, c, n) in solution:
+            grid[r][c] = n
+        yield grid
 
 def import_grids():
     grids = []
@@ -6,42 +71,13 @@ def import_grids():
         data = f.readlines()
     for i in range(1,492,10):
         grid = [[int(x) for x in row.strip()] for row in data[i:i+9]]
-        grids.append(np.array(grid))
+        grids.append(grid)
     return grids
-
-def is_possible(grid,n,pos):
-    r,c = pos
-    r0,c0 = (r//3)*3,(c//3)*3
-    if n in grid[r,:]:
-        return False
-    elif n in grid[:,c]:
-        return False
-    elif n in grid[r0:r0+3,c0:c0+3]:
-        return False
-    else:
-        return True
-
-def iter_sudoku_solver(grid):
-    rs,cs = np.where(grid==0)
-    empty_cells = [(r,c) for r,c in zip(rs,cs)]
-    empty_size = len(empty_cells)
-    index = 0
-    while index < empty_size:
-        pos = empty_cells[index]
-        for n in range(grid[pos]+1,10):
-            if is_possible(grid,n,pos):
-                grid[pos] = n
-                index = index + 1
-                break
-        else:
-            grid[pos] = 0
-            index = index - 1
-    return grid   
 
 def main():
     ans = 0
     grids = import_grids()
     for grid in grids:
-        g = iter_sudoku_solver(grid)
-        ans += (g[0,0]*100+g[0,1]*10+g[0,2])
+        g = list(solve_sudoku((3, 3), grid))[0]
+        ans += (g[0][0]*100+g[0][1]*10+g[0][2])
     return ans
