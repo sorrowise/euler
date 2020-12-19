@@ -1,4 +1,4 @@
-# time cost = 79.3 ms ± 617 µs
+# time cost = 16.2 s ± 343 ms
 
 import numpy as np
 
@@ -26,5 +26,5 @@ def amicable_chain(start):
             start = n
 
 def main():
-    res = [amicable_chain(i) for i in range(10000,15000)]
+    res = [amicable_chain(i) for i in range(10000,10**6)]
     return min(max([x for x in res if x!=None],key=len))
