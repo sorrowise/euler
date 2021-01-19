@@ -9,8 +9,7 @@ def get_dice_mat():
     mat = np.zeros((n,n))
     for i in range(n):
         for j in range(n):
-            v = prob.get((j-i)%40)
-            mat[i,j] = v if v != None else 0
+            mat[i,j] = prob.get((j-i)%40,0)
     return mat
 
 def get_card_mat():
