@@ -1,9 +1,9 @@
-# time cost = 2.84 ms ± 14.9 µs
+# time cost = 2.68 ms ± 16.7 µs per
 
 def main(k=30):
     arr = []
-    for b in range(1,100):
-        for p in range(1,10):
+    for b in range(2,100):
+        for p in range(2,10):
             n = b ** p
             if n > 10:
                 ds = sum([int(x) for x in str(n)])
