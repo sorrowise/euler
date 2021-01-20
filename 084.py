@@ -1,4 +1,4 @@
-# time cost = 4.4 ms ± 12 µs
+# time cost = 3.52 ms ± 9.31 µs
 
 import numpy as np
 
@@ -16,30 +16,29 @@ def get_card_mat():
     n = 40
     card_mat = np.zeros((n,n))
     for i in range(n):
-        for j in range(n):
-            if i in [2,17,33]:
-                card_mat[i,0] = 0.0625
-                card_mat[i,i] = 0.875
-                card_mat[i,10] = 0.0625
-            elif i == 30:
-                card_mat[i,10] = 1
-            elif i == 7:
-                card_mat[i,i] = 0.375
-                card_mat[i,15] = 0.125
-                for k in [0,4,5,10,11,12,24,39]:
-                    card_mat[i,k] = 0.0625
-            elif i == 22:
-                card_mat[i,i] = 0.375
-                card_mat[i,25] = 0.125
-                for k in [0,5,10,11,19,24,28,39]:
-                    card_mat[i,k] = 0.0625  
-            elif i == 36:
-                card_mat[i,i] = 0.375
-                card_mat[i,5] = 0.1875
-                for k in [0,10,11,12,24,33,39]:
-                    card_mat[i,k] = 0.0625
-            else:
-                card_mat[i,i] = 1.0
+        if i in [2,17,33]:
+            card_mat[i,0] = 0.0625
+            card_mat[i,i] = 0.875
+            card_mat[i,10] = 0.0625
+        elif i == 30:
+            card_mat[i,10] = 1
+        elif i == 7:
+            card_mat[i,i] = 0.375
+            card_mat[i,15] = 0.125
+            for j in [0,4,5,10,11,12,24,39]:
+                card_mat[i,j] = 0.0625
+        elif i == 22:
+            card_mat[i,i] = 0.375
+            card_mat[i,25] = 0.125
+            for j in [0,5,10,11,19,24,28,39]:
+                card_mat[i,j] = 0.0625  
+        elif i == 36:
+            card_mat[i,i] = 0.375
+            card_mat[i,5] = 0.1875
+            for j in [0,10,11,12,24,33,39]:
+                card_mat[i,j] = 0.0625
+        else:
+            card_mat[i,i] = 1.0
     return card_mat 
 
 def get_steady_vector():
