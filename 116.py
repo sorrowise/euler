@@ -2,10 +2,10 @@
 
 from scipy.special import comb
 
-def replaced_ways(n,length):
+def replaced_ways(n,m):
     w = 0
-    for k in range(1,n//length+1):
-        t = k + n - k*length
+    for k in range(1,n//m+1):
+        t = k + n - k*m
         w += comb(t,k)
     return w
 
