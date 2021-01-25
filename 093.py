@@ -1,7 +1,6 @@
-# time cost = 22.4 s ± 26.2 ms
+# time cost = 20.9 s ± 249 ms
 
-from itertools import permutations,product,count
-from fractions import Fraction
+from itertools import permutations,product,count,combinations
 
 def eval_arith_expression(dp,op):
     arr = []
@@ -21,23 +20,20 @@ def eval_arith_expression(dp,op):
 def consecutive_integers_number(integers):
     c = 0
     numbers = []
-    digits = [Fraction(x,1) for x in integers]
     operators = list(product(["+","-","*","/"],repeat=3))
-    digits_perm = list(permutations(digits,4))
+    digits_perm = list(permutations(integers,4))
     for dp in digits_perm:
         for op in operators:
             numbers += eval_arith_expression(dp,op)
-    targets = {x for x in set(numbers) if x>0 and x%1==0}
     for i in count(1):
-        if i in targets:
+        if i in numbers:
             c += 1
         else:
             return c
 
 def main():
     d = {}
-    perm = [x for x in permutations(range(10),4) if x[0]<x[1]<x[2]<x[3]]
-    for p in perm:
+    for p in combinations(range(10),4):
         d[tuple(p)] = consecutive_integers_number(p)
     res = max(d,key=d.get)
     return "".join([str(x) for x in res])
