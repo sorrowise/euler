@@ -1,4 +1,4 @@
-# time cost = 20.9 s ± 249 ms
+# time cost = 12.2 s ± 42 ms
 
 from itertools import permutations,product,count,combinations
 
@@ -33,7 +33,7 @@ def consecutive_integers_number(integers):
 
 def main():
     d = {}
-    for p in combinations(range(10),4):
+    for p in combinations(range(1,10),4):
         d[tuple(p)] = consecutive_integers_number(p)
     res = max(d,key=d.get)
     return "".join([str(x) for x in res])
