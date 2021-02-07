@@ -7,5 +7,5 @@ def main(N=10**8):
     u = int(N**0.5)
     primes = primerange(1,u+1)
     for n,p in enumerate(primes):
-        c += primepi(N//p)-n
+        c += primepi((N-1)//p)-n
     return c
