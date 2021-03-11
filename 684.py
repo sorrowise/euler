@@ -1,7 +1,7 @@
 # time cost = 271 µs ± 3.42 µs
 
 def s(k,r,m=10**9+7):
-    res = (r*(r+3)//2+6)*pow(10,k,m)-9*k-6-r
+    res = ((r+1)*(r+2)//2+5)*pow(10,k,m)-9*k-6-r
     return res
 
 def main(n=90):
