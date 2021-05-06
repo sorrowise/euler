@@ -7,6 +7,6 @@ def main(N=12):
         b1,b2 = 2*x+4,2*x-4
         if b1%5 == 0 or b2%5==0:
             res += y
+            n += 1
         x,y = 9*x+20*y,4*x+9*y
-        n += 1
     return res
