@@ -16,3 +16,6 @@ def hn(n,f):
         return hn(n,f-1)
     else:
         return hn(n,f-1)+hn(n//f,f)
+
+def main(n=10**9,f=100):
+    return hn(n,f)
