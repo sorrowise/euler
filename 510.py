@@ -1,4 +1,4 @@
-# time cost = 57.4 s ± 3.32 s
+# time cost = 15.9 ms ± 254 µs
 
 from math import gcd
 
@@ -16,7 +16,6 @@ def main(n=10**9):
             k = 1
             if gcd(i,j) == 1:
                 rc,ra,rb = triplets(i,j)
-                while k*rb <= n:
-                    res += k*(rc+ra+rb)
-                    k += 1
+                k = n // rb
+                res += k*(k+1)*(rc+ra+rb)//2
     return res
