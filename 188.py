@@ -1,5 +1,7 @@
 # time cost = 31.9 µs ± 78.6 ns
 
+from sympy.ntheory import totient
+
 def main(b=1777,e=1855,m=10**8):
     res,phis = 1,[m]
     while m != 1:
