@@ -1,18 +1,10 @@
-# time cost = 4.21 ms ± 10.7 µs
+# time cost = 31.9 µs ± 78.6 ns
 
 def main(b=1777,e=1855,m=10**8):
-    res = b
-    for _ in range(e):
-        res = pow(b,res,m)
-    return res
-
-
-# time cost = 4.74 ms ± 9.72 µs
-
-from sympy.ntheory import totient
-
-def main(b=1777,e=1855,m=10**8):
-    res = b
-    for _ in range(e):
-        res = pow(b,res%totient(m),m)
+    res,phis = 1,[m]
+    while m != 1:
+        m = totient(m)
+        phis.append(m)
+    for phi in reversed(phis):
+        res = pow(b,res,phi)
     return res
